@@ -1,0 +1,15 @@
+MTT Lab Pro — Phase 1 / audit initial du moteur (20 novembre 2026)
+
+CORRIGÉ
+- Évaluateur 5 cartes : la quinte flush ne peut plus être détectée avec des cartes de couleurs différentes.
+- Protection contre une relance impossible qui se transformerait silencieusement en action invalide.
+- Taille minimale de relance fondée sur la dernière relance complète enregistrée.
+
+RESTE À FIABILISER AVANT DE CONSIDÉRER LE MOTEUR VALIDÉ
+- Les relances all-in inférieures à une relance complète rouvrent actuellement l'action à tort : modèle de tour d'enchères à refaire.
+- Décomposer le moteur en modules testables (état, actions légales, transitions, side pots, évaluation).
+- Tests automatisés exhaustifs : 7-card showdown, split pots, side pots, all-in, conservation des bb, pots non contestés.
+- Vérifier les scénarios d'exercices et le réalisme des adversaires : ils ne constituent pas une source de stratégie validée.
+- Vérifier l'installation et le cache PWA sur Android après mise à jour.
+
+IMPORTANT : cette livraison est un premier correctif de fiabilité, PAS la refonte complète ni une certification du moteur.

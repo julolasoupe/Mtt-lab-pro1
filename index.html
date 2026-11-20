@@ -414,8 +414,8 @@ function liveAct(pos,kind,total){if(!live||live.finished||live.turn!==pos)return
  else if(kind==='check'){if(toCall>0)return;pl.action='CHECK';live.log.push(`${pos} : check`);live.lastAction=`${pos} · CHECK`}
  else if(kind==='call'){paid=liveAdd(pos,live.highest);pl.action=pl.stack===0?'ALL-IN':'CALL';live.log.push(`${pos} : ${pl.action.toLowerCase()} ${paid} bb`);live.lastAction=`${pos} · ${pl.action} ${paid} bb`}
  else if(kind==='raise'){
- const max=liveRound(pl.street+pl.stack),min=live.highest===0?1:live.highest+Math.max(1,live.lastRaiseSize||1),target=Math.min(max,Math.max(min,liveRound(total)));
- if(target<=before&&max>before)return;
+ const max=liveRound(pl.street+pl.stack),min=live.highest===0?1:live.highest+(live.lastRaiseSize||1),target=Math.min(max,Math.max(min,liveRound(total)));
+ if(target<=before){if(max<=before){liveAct(pos,'call');return}return;}
  paid=liveAdd(pos,target);if(pl.street>before){live.highest=pl.street;live.lastRaiseSize=liveRound(live.highest-before)}
  pl.action=pl.stack===0?'ALL-IN':before===0?'BET':'RAISE';live.log.push(`${pos} : ${pl.action.toLowerCase()} à ${pl.street} bb (+${paid} bb)`);live.lastAction=`${pos} · ${pl.action} ${pl.street} bb`;
  if(live.highest>before){live.pending=liveAble().filter(p=>p!==pos)}
@@ -435,7 +435,25 @@ function liveAdvance(){if(!live||live.finished)return;if(liveActive().length===1
  for(const pos of positions){live.players[pos].street=0;if(!live.players[pos].folded)live.players[pos].action=''}live.highest=0;live.lastRaiseSize=1;live.pending=liveAble();live.turn=liveNext('BTN');if(!live.turn){liveRunout();return}live.busy=live.turn!==live.hero;if(live.busy)liveDelay(liveOpponent);render()}
 function liveRunout(){if(!live)return;while(live.shown<5){live.shown=live.shown<3?3:live.shown+1;live.log.push(`Board : ${live.board.slice(0,live.shown).map(c=>c.r+c.s).join(' ')}`)}live.street='River';liveShowdown()}
 // 7-card hand rank evaluator (5-card combinations), for a pedagogical showdown.
-function liveFive(cs){const nums=cs.map(c=>14-ranks.indexOf(c.r)).sort((a,b)=>b-a),counts={};for(const n of nums)counts[n]=(counts[n]||0)+1;const groups=Object.entries(counts).map(([n,c])=>[+c,+n]).sort((a,b)=>b[0]-a[0]||b[1]-a[1]);const flush=cs.every(c=>c.s===cs[0].s),unique=[...new Set(nums)],straight=unique.includes(14)&&[5,4,3,2].every(n=>unique.includes(n))?5:0;let hi=straight;for(let i=0;i<unique.length-4;i++)if(unique[i]-unique[i+4]===4)hi=Math.max(hi,unique[i]);const pack=(cat,arr)=>[cat,...arr,...Array(5).fill(0)].slice(0,6);if(flush&&hi)return pack(8,[hi]);if(groups[0][0]===4)return pack(7,[groups[0][1],groups[1][1]]);if(groups[0][0]===3&&groups[1][0]>=2)return pack(6,[groups[0][1],groups[1][1]]);if(flush)return pack(5,nums);if(hi)return pack(4,[hi]);if(groups[0][0]===3)return pack(3,[groups[0][1],...groups.slice(1).map(g=>g[1])]);if(groups[0][0]===2&&groups[1][0]===2)return pack(2,[groups[0][1],groups[1][1],groups[2][1]]);if(groups[0][0]===2)return pack(1,[groups[0][1],...groups.slice(1).map(g=>g[1])]);return pack(0,nums)}
+function liveFive(cs){
+ // Five-card evaluator: straight flush must use the SAME suit for all five cards.
+ const nums=cs.map(c=>14-ranks.indexOf(c.r)).sort((a,b)=>b-a);
+ const counts={};for(const n of nums)counts[n]=(counts[n]||0)+1;
+ const groups=Object.entries(counts).map(([n,c])=>[+c,+n]).sort((a,b)=>b[0]-a[0]||b[1]-a[1]);
+ const flush=cs.every(c=>c.s===cs[0].s);
+ const straightHigh=values=>{const u=[...new Set(values)].sort((a,b)=>b-a);if(u.includes(14))u.push(1);for(let i=0;i<=u.length-5;i++)if(u[i]-u[i+4]===4)return u[i];return 0};
+ const hi=straightHigh(nums);
+ const pack=(cat,arr)=>[cat,...arr,...Array(5).fill(0)].slice(0,6);
+ if(flush&&hi)return pack(8,[hi]);
+ if(groups[0][0]===4)return pack(7,[groups[0][1],groups[1][1]]);
+ if(groups[0][0]===3&&groups[1][0]>=2)return pack(6,[groups[0][1],groups[1][1]]);
+ if(flush)return pack(5,nums);
+ if(hi)return pack(4,[hi]);
+ if(groups[0][0]===3)return pack(3,[groups[0][1],...groups.slice(1).map(g=>g[1])]);
+ if(groups[0][0]===2&&groups[1][0]===2)return pack(2,[groups[0][1],groups[1][1],groups[2][1]]);
+ if(groups[0][0]===2)return pack(1,[groups[0][1],...groups.slice(1).map(g=>g[1])]);
+ return pack(0,nums)
+}
 function liveBest(cards){let best=null;for(let a=0;a<7;a++)for(let b=a+1;b<7;b++){const x=liveFive(cards.filter((_,i)=>i!==a&&i!==b));if(!best||liveCmp(x,best)>0)best=x}return best}
 function liveCmp(a,b){for(let i=0;i<a.length;i++)if(a[i]!==b[i])return a[i]-b[i];return 0}
 function liveShowdown(){stopLive();live.shown=5;live.finished=true;live.busy=false;live.payouts={};const eligible=liveActive(),levels=[...new Set(positions.map(p=>live.players[p].invested).filter(v=>v>0))].sort((a,b)=>a-b);let prev=0,main=0,side=0;
