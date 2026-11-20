@@ -1,0 +1,10 @@
+MTT LAB PRO — REFONTE UNIFIÉE
+
+Phase 1 : action de raise et gestion des relances courtes, journal et showdowns existants.
+Phase 2 : coach contextuel pendant la partie (board, pot odds, SPR, multiway). Ne calcule pas EV GTO.
+Phase 3 : profils adverses distincts (nit, reg, LAG, station, passif) et comportements heuristiques.
+Phase 4 : historique des décisions interactives et export/import JSON.
+
+LIMITES : Pas de solveur, pas de vraie analyse de range ni d’ICM. La simulation reste pédagogique. Les tests automatiques ne remplacent pas un audit de toutes les règles et un test sur appareil.
+
+Installation : déposer les fichiers à la racine du dépôt GitHub Pages Mtt-lab-pro1.
