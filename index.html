@@ -1,0 +1,209 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MTT Lab Pro — Poker Trainer</title><meta name="theme-color" content="#111014"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="MTT Lab"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png"><style>
+:root{font-family:Inter,system-ui,-apple-system,sans-serif;color:#e9edf6;background:#0b1020}*{box-sizing:border-box}body{margin:0}button,select,input,textarea{font:inherit}button{cursor:pointer}header{padding:18px 26px;border-bottom:1px solid #27304a;display:flex;justify-content:space-between;align-items:center;background:#111a30}h1{margin:0;font-size:23px}h2{margin:0 0 14px;font-size:22px}h3{margin:0 0 10px}small,.muted{color:#9aa8c4}.shell{display:grid;grid-template-columns:230px 1fr;min-height:calc(100vh - 68px)}nav{padding:20px 12px;border-right:1px solid #27304a;background:#10182b}nav button{width:100%;text-align:left;border:0;background:transparent;color:#c8d4ec;padding:13px;border-radius:10px;margin-bottom:5px}nav button.active,nav button:hover{background:#25385b;color:white}main{padding:28px;max-width:1250px;width:100%;margin:auto}.panel{background:#151f35;border:1px solid #2a3956;border-radius:16px;padding:22px;margin-bottom:18px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}.metric{font-size:28px;font-weight:800;color:#82baff}.btn{border:1px solid #41628f;background:#253b61;color:#f3f7ff;padding:11px 16px;border-radius:10px}.btn:hover{background:#355783}.primary{background:#3978db;border-color:#3978db}.btn:disabled{opacity:.4;cursor:not-allowed}select,input,textarea{background:#0c1528;color:#e8efff;border:1px solid #394b69;border-radius:9px;padding:10px;max-width:100%}label{display:block;color:#b8c7df;font-size:13px;margin-bottom:6px}.filters{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}.filters>div{min-width:160px}.cards{display:flex;justify-content:center;gap:9px;margin:20px}.card{height:91px;width:66px;background:#f8fafc;color:#111a2d;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:29px;font-weight:800;box-shadow:0 4px 12px #0005}.red{color:#d33d57}.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px}.choice{padding:14px;border:1px solid #3b5275;border-radius:10px;background:#172b49;color:white;text-align:center}.choice.sel{border:2px solid #69a5ff;background:#274b80}.good{color:#76dfae}.bad{color:#ff8e9b}.pill{display:inline-block;padding:5px 9px;border-radius:20px;background:#293e61;font-size:12px}.matrix{display:grid;grid-template-columns:repeat(13,minmax(23px,1fr));gap:3px;max-width:690px}.cell{border:1px solid #364b6d;border-radius:4px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:clamp(9px,1.1vw,12px);cursor:pointer;background:#263651}.cell.on{background:#287f71;color:white}.cell.pair{border-color:#9a80cc}.progress{height:9px;border-radius:8px;background:#283b5b;overflow:hidden}.progress>div{height:100%;background:#60a5fa}table{border-collapse:collapse;width:100%}th,td{border-bottom:1px solid #31415c;padding:10px;text-align:left}details{margin:12px 0;border:1px solid #334562;border-radius:10px;padding:12px}summary{cursor:pointer;font-weight:650}.stack{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}.seat{background:#0e172a;border:1px solid #354c6d;padding:12px;border-radius:10px;min-width:95px;text-align:center}.seat.hero{border-color:#6ea7ff}.feedback{border-left:4px solid #6ba4f5;background:#10233c;padding:16px;border-radius:7px;line-height:1.6}p{line-height:1.55}footer{padding:16px;color:#8fa2c2;text-align:center}@media(max-width:760px){.shell{display:block}nav{display:flex;overflow:auto;gap:5px;padding:8px}nav button{min-width:max-content;width:auto}main{padding:15px}.matrix{gap:1px}.cell{font-size:8px}.card{width:53px;height:75px}}
+
+/* MTT Lab Pro — dark red poker-room inspired theme (original artwork) */
+:root{color-scheme:dark;font-family:Inter,-apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:#f2f0f0;background:#0d0d10}
+body{background:radial-gradient(ellipse at 80% -10%,#3a1219 0,transparent 45%),#0d0d10}
+header{background:linear-gradient(100deg,#181417,#271116);border-bottom:2px solid #b82137;gap:12px}
+header h1{font-weight:950;letter-spacing:.07em;text-shadow:0 2px 8px #0007}
+header h1 span{color:#ef3e50!important}
+nav{background:#151317;border-right:1px solid #3c282d}
+nav button{color:#d9cfd1;font-weight:650;transition:background .16s ease}
+nav button.active,nav button:hover{background:linear-gradient(100deg,#9f1d32,#551b26);color:white}
+.panel{background:linear-gradient(155deg,#1c1b20,#151419);border:1px solid #453138;box-shadow:0 12px 28px #0003}
+.metric{color:#ff576a}
+.btn{background:#2c272c;border:1px solid #69505a;color:#fff;font-weight:700}
+.btn:hover{background:#493039}
+.btn.primary,.primary{background:linear-gradient(145deg,#e3374c,#aa1830);border-color:#ef5365;color:white;box-shadow:0 3px 15px #aa183044}
+.btn.primary:hover{background:#f2465b}
+select,input,textarea{background:#141317;border:1px solid #60454e;color:#f5f1f2}
+label,.muted,small{color:#b7a7ae}
+.card{background:linear-gradient(145deg,#fff,#eae7e4);border:2px solid #e1d8d6;box-shadow:0 6px 16px #0008;color:#17131a}
+.card.red{color:#c61c39}
+.choice{background:#242126;border-color:#624750;min-height:50px;font-weight:700}
+.choice.sel{border:2px solid #f3485e;background:#58212f}
+.pill{background:#46202b;color:#ffdbe1;border:1px solid #733543}
+.good{color:#64dba1}.bad{color:#ff7487}
+.cell{background:#30272e;border-color:#57404a}.cell.on{background:#a92843}.cell.pair{border-color:#ae7b8e}
+.progress{background:#382831}.progress>div{background:linear-gradient(90deg,#a61d34,#f44b61)}
+th,td{border-color:#47353d}details{border-color:#55404a}
+.seat{background:linear-gradient(150deg,#2a2429,#161719);border-color:#73505d;border-radius:14px;box-shadow:0 5px 12px #0004}
+.seat.hero{border:2px solid #f0475e;box-shadow:0 0 0 3px #9d1e342e}
+.stack{position:relative;padding:28px 16px;isolation:isolate;border-radius:50% / 35%;background:radial-gradient(ellipse at center,#195b49 0%,#124435 63%,#0b2c27 75%,#1a1719 76%,#292026 82%,transparent 83%);border:2px solid #60464e;min-height:175px;align-items:center;justify-content:space-around}
+.feedback{border-left:4px solid #f0445c;background:#271a23}
+:focus-visible{outline:3px solid #ff778a;outline-offset:2px}
+@media(max-width:760px){
+ header{padding:12px 14px;align-items:flex-start;flex-wrap:wrap}header h1{font-size:20px}header .pill{font-size:10px}
+ .shell{display:block}nav{position:sticky;top:0;z-index:20;display:flex;overflow-x:auto;gap:6px;padding:9px;background:#151317;scrollbar-width:thin}
+ nav button{min-width:max-content;white-space:nowrap;width:auto;padding:12px;font-size:13px}
+ main{padding:12px;min-width:0}.panel{padding:14px;border-radius:13px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .filters{gap:8px}.filters>div{flex:1 1 135px;min-width:0}
+ .choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .choice,.btn{min-height:44px}
+ .stack{padding:15px 6px;min-height:160px;gap:4px;border-radius:35px;flex-wrap:wrap}
+ .seat{min-width:68px;padding:8px 5px;font-size:12px}
+ .matrix{width:100%;max-width:100%;gap:1px;overflow:hidden}
+ .cell{font-size:clamp(7px,1.9vw,11px);min-width:0;border-radius:2px}
+ .card{width:54px;height:76px;font-size:25px}
+ table{display:block;overflow-x:auto}h2{font-size:19px}
+}
+@media(max-width:370px){.grid{grid-template-columns:1fr}.seat{min-width:60px}.cell{font-size:7px}}
+</style></head><body><header><h1>♠ MTT LAB <span style="color:#6da9ff">PRO</span></h1><span class="pill">6-max · Micro MTT · bb uniquement</span></header><div class="shell"><nav id="nav"></nav><main id="app"></main></div><footer>Entraînement pédagogique : ranges et recommandations indicatives, pas des sorties exactes de solveur. Aucun résultat financier garanti.</footer><script>
+const $=s=>document.querySelector(s), esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const sections=[['home','⌂ Tableau de bord'],['train','♠ Entraînement'],['range','▦ Ranges 169 mains'],['math','∑ Calculateurs'],['lessons','☷ Bibliothèque'],['history','◷ Historique'],['settings','⚙ Paramètres']];
+const storeKey='mtt-lab-pro-v2';let saved={history:[],rangeMarks:{},settings:{difficulty:'mix',phase:'all'}};try{saved={...saved,...JSON.parse(localStorage.getItem(storeKey)||'{}')}}catch{}const save=()=>localStorage.setItem(storeKey,JSON.stringify(saved));let page='home',spot=null,selected=null,answered=false,reason='',filterPhase='all',filterTopic='all',rangePreset='BTN 30bb',rangeCustom={};
+const positions=['UTG','HJ','CO','BTN','SB','BB'];const ranks='AKQJT98765432'.split('');const suits=['♠','♥','♦','♣'];const rnd=n=>Math.floor(Math.random()*n), pick=a=>a[rnd(a.length)];const hand=()=>{let a=pick(ranks),b=pick(ranks),s1=pick(suits),s2=pick(suits);if(a===b){s2=pick(suits.filter(x=>x!==s1))}return [{r:a,s:s1},{r:b,s:s2}]};const labelHand=h=>h[0].r+h[1].r+(h[0].r===h[1].r?'':h[0].s===h[1].s?'s':'o');const handStrength=h=>{let a=ranks.indexOf(h[0].r),b=ranks.indexOf(h[1].r),pair=a===b,s=h[0].s===h[1].s,hi=12-Math.min(a,b),lo=12-Math.max(a,b);return pair?58+hi*3.1:hi*3.3+lo*1.1+(s?11:0)+(Math.abs(a-b)===1?5:0)};
+const topics={pre:['RFI / open','Défense BB','Défense SB','3-bet','Défense 3-bet','4-bet','Squeeze','Push / Fold','Reshove','Call vs shove','ICM préflop','PKO préflop'],post:['C-bet flop','Défense flop','Check-raise','Turn barrel','Delayed c-bet','Probe bet','River value','River bluff','Bluffcatch','Overbet','Pot 3-bet','Multiway','ICM postflop','PKO postflop']};
+// A scenario is constructed from a legal action sequence, never from independent seats.
+const seatOrder=['UTG','HJ','CO','BTN','SB','BB'];
+const fmt=n=>Number(n.toFixed(2));
+function makeSpot(){
+ const phase=filterPhase==='all'?pick(['pre','post']):filterPhase;
+ const topic=filterTopic==='all'||!topics[phase].includes(filterTopic)?pick(topics[phase]):filterTopic;
+ const h=hand(),str=handStrength(h),stack=pick([8,12,15,18,22,28,35,45,60,80]);
+ const villainType=pick(['Régulier agressif','Régulier serré','Récréatif passif','Récréatif agressif']);
+ const icm=topic.includes('ICM'),pko=topic.includes('PKO');
+ let hero,villain,street='Préflop',board=[],facing=0,pot=0,toCall=0,history=[],choices=[],effective=stack;
+ const ante=.1,dead=1.5+6*ante;
+ const open=pick([2,2.2,2.5]);
+ const earlier=pos=>seatOrder.slice(0,seatOrder.indexOf(pos)).filter(x=>x!=='SB'&&x!=='BB');
+ if(phase==='pre'){
+   const kind=topic==='RFI / open'?'rfi':topic==='Défense BB'?'bb':topic==='Défense SB'?'sb':topic==='3-bet'?'three':topic==='Défense 3-bet'?'def3':topic==='4-bet'?'four':topic==='Squeeze'?'squeeze':topic==='Push / Fold'?'push':topic==='Reshove'?'reshove':topic==='Call vs shove'?'callshove':pick(['rfi','bb','reshove','def3']);
+   if(kind==='rfi'||kind==='push'){
+     hero=pick(['UTG','HJ','CO','BTN','SB']);villain=hero==='SB'?'BB':pick(['SB','BB']);
+     history=[...earlier(hero).map(p=>p+' fold'),hero+' à parler'];
+     pot=fmt(dead);facing=0;choices=hero==='SB'?['Fold','Limp','Raise 2 bb','Shove']:['Fold','Raise 2 bb','Shove'];
+   }else if(kind==='bb'||kind==='sb'||kind==='reshove'||kind==='three'||kind==='squeeze'){
+     hero=kind==='bb'?'BB':kind==='sb'?'SB':kind==='squeeze'?pick(['BTN','SB','BB']):pick(['CO','BTN','SB','BB']);
+     const possible=earlier(hero);villain=kind==='squeeze'?pick(possible.filter(p=>seatOrder.indexOf(p)<seatOrder.indexOf(hero)-1)):pick(possible.length?possible:['BTN']);
+     // For CO, HJ and UTG are the only legal opening seats.
+     const extra=kind==='squeeze'?pick(seatOrder.filter(x=>x!==hero&&x!==villain&&seatOrder.indexOf(x)>seatOrder.indexOf(villain)&&seatOrder.indexOf(x)<seatOrder.indexOf(hero))):null;
+     history=[villain+' open '+open+' bb'];if(extra)history.push(extra+' call '+open+' bb');
+     history.push(hero+' à parler');pot=fmt(dead+(open-(villain==='SB'?.5:villain==='BB'?1:0))+(extra?open-(extra==='SB'?.5:extra==='BB'?1:0):0));
+     toCall=fmt(open-(hero==='BB'?1:hero==='SB'?.5:0));facing=open;
+     choices=['Fold','Call','3-bet / Raise','Shove'];
+   }else if(kind==='def3'||kind==='four'){
+     hero=pick(['UTG','HJ','CO','BTN']);villain=pick(seatOrder.slice(seatOrder.indexOf(hero)+1));
+     const three=fmt(open*pick([2.8,3,3.5]));
+     history=[hero+' open '+open+' bb',villain+' 3-bet '+three+' bb',hero+' à parler'];
+     pot=fmt(dead+open+(three-(villain==='SB'?.5:villain==='BB'?1:0)));
+     toCall=fmt(three-open);facing=three;choices=['Fold','Call','3-bet / Raise','Shove'];
+   }else{
+     hero=pick(['CO','BTN','SB','BB']);villain=pick(earlier(hero).length?earlier(hero):['BTN']);
+     const shove=fmt(Math.min(stack,pick([8,12,15,18,22])));
+     history=[villain+' shove '+shove+' bb',hero+' à parler'];
+     pot=fmt(dead+shove-(villain==='SB'?.5:villain==='BB'?1:0));
+     toCall=fmt(shove-(hero==='SB'?.5:hero==='BB'?1:0));facing=shove;
+     choices=['Fold','Call'];
+   }
+ }else{
+   hero=pick(['UTG','HJ','CO','BTN','SB','BB']);
+   const others=seatOrder.filter(x=>x!==hero);
+   villain=hero==='BB'?pick(['CO','BTN','SB']):hero==='SB'?pick(['CO','BTN','BB']):pick(['SB','BB']);
+   const opener=hero==='BB'||hero==='SB'?villain:hero;
+   const defender=opener===hero?villain:hero;
+   const preRaise=topic==='Pot 3-bet';
+   let prePot;
+   if(preRaise){
+     const r=7;history=[opener+' open 2 bb',defender+' 3-bet '+r+' bb',opener+' call '+fmt(r-2)+' bb'];prePot=fmt(dead+2*r-((opener==='SB'?.5:opener==='BB'?1:0)+(defender==='SB'?.5:defender==='BB'?1:0)));
+   }else{
+     history=[opener+' open 2 bb',defender+' call '+fmt(2-(defender==='SB'?.5:defender==='BB'?1:0))+' bb'];
+     prePot=fmt(dead+4-((opener==='SB'?.5:opener==='BB'?1:0)+(defender==='SB'?.5:defender==='BB'?1:0)));
+   }
+   const used=new Set(h.map(c=>c.r+c.s));const full=[];
+   while(full.length<5){const c={r:pick(ranks),s:pick(suits)};if(!used.has(c.r+c.s)){used.add(c.r+c.s);full.push(c)}}
+   street=topic.includes('River')||topic==='Bluffcatch'||topic==='Overbet'?'River':topic.includes('Turn')||topic==='Delayed c-bet'||topic==='Probe bet'?'Turn':pick(['Flop','Turn','River']);
+   board=full.slice(0,street==='Flop'?3:street==='Turn'?4:5);
+   // Each earlier street is checked through: no phantom bets or impossible pot sizes.
+   if(street!=='Flop')history.push('Flop '+full.slice(0,3).map(c=>c.r+c.s).join(' ')+' : check / check');
+   if(street==='River')history.push('Turn '+full[3].r+full[3].s+' : check / check');
+   pot=prePot;
+   const betTopics=['Défense flop','Bluffcatch','Check-raise'];
+   const bet=betTopics.includes(topic)||Math.random()<.4;
+   if(bet){facing=fmt(Math.min(pot*pick([.33,.5,.75]),stack*.6));toCall=facing;history.push(street+' : '+villain+' bet '+facing+' bb',hero+' à parler');choices=['Fold','Call','Raise 3x','Shove']}
+   else{history.push(street+' : '+villain+' check',hero+' à parler');choices=['Check','Bet 33%','Bet 75%','Overbet 125%']}
+ }
+ const score={};let advice='';
+ // Scoring remains heuristic, but only offers actions that are legal in the constructed spot.
+ if(phase==='pre'){
+  if(facing===0){score['Raise 2 bb']=str>43?3:str>29?2:0;score.Fold=str<28?3:0;score.Shove=stack<=12&&str>46?3:stack>20?0:1;if(choices.includes('Limp'))score.Limp=stack>12?2:0;advice='Évalue la range d’ouverture par position, les blindes et les antes.'}
+  else{score.Fold=str<32?3:str<42?2:0;score.Call=str>39&&stack>13?3:str>31?2:0;score['3-bet / Raise']=str>59&&stack>20?3:str>45?2:0;score.Shove=stack<=20&&str>50?3:stack>30?0:1;advice='La défense dépend des cotes, de la position et de la range adverse.'}
+ }else{
+  const made=board.some(c=>h.some(x=>x.r===c.r)),pair=h[0].r===h[1].r,draw=board.length<5&&h[0].s===h[1].s&&board.filter(c=>c.s===h[0].s).length>=2,value=made||pair;
+  if(facing===0){score.Check=value?2:3;score['Bet 33%']=value||draw?3:2;score['Bet 75%']=value?3:draw?2:1;score['Overbet 125%']=value&&street==='River'?2:1}
+  else{score.Fold=!value&&!draw?3:0;score.Call=value||draw?3:1;score['Raise 3x']=value&&str>52?2:draw?2:0;score.Shove=value&&stack<=15?2:0}
+  advice='Évalue les ranges, le board, le SPR et les bloqueurs.';
+ }
+ const best=Math.max(...choices.map(x=>score[x]||0));
+ const result={phase,topic,h,str,stack,hero,villain,villainType,board,street,pot,facing,toCall,choices,score,best,advice,icm,pko,history,id:Date.now()+Math.random()};
+ validateSpot(result);return result;
+}
+function validateSpot(s){
+ if(!seatOrder.includes(s.hero)||!seatOrder.includes(s.villain)||s.hero===s.villain)throw Error('Positions invalides');
+ if(!s.history.length||!s.history.at(-1).includes('à parler'))throw Error('Historique incomplet');
+ if(!(s.pot>0)||s.toCall<0||s.toCall>s.stack)throw Error('Pot ou montant à payer invalide');
+ if(s.phase==='pre'&&s.facing>0&&s.choices.includes('Raise 2 bb'))throw Error('Action incompatible');
+ if(s.phase==='post'&&s.board.length!==({Flop:3,Turn:4,River:5}[s.street]))throw Error('Board invalide');
+ if(s.phase==='pre'&&s.topic==='RFI / open'&&s.facing!==0)throw Error('RFI invalide');
+}
+
+function render(){ $('#nav').innerHTML=sections.map(([id,name])=>`<button class="${page===id?'active':''}" onclick="go('${id}')">${name}</button>`).join('');({home:homePage,train:trainPage,range:rangePage,math:mathPage,lessons:lessonsPage,history:historyPage,settings:settingsPage}[page])()};function go(p){page=p;render()};const pct=(a,b)=>b?Math.round(a/b*100):0;
+function homePage(){let h=saved.history,correct=h.filter(x=>x.correct).length;$('#app').innerHTML=`<h2>Tableau de bord</h2><div class="grid"><div class="panel"><small>Spots joués</small><div class="metric">${h.length}</div></div><div class="panel"><small>Réponses recommandées</small><div class="metric">${pct(correct,h.length)}%</div></div><div class="panel"><small>Préflop</small><div class="metric">${h.filter(x=>x.phase==='pre').length}</div></div><div class="panel"><small>Postflop</small><div class="metric">${h.filter(x=>x.phase==='post').length}</div></div></div><div class="panel"><h3>Ton parcours</h3><p>Entraîne-toi sur toutes les décisions préflop et postflop. Les situations sont générées à partir de règles pédagogiques simplifiées ; les scores ne mesurent pas une EV GTO réelle.</p><button class="btn primary" onclick="go('train')">Commencer un exercice →</button></div><div class="panel"><h3>Points à travailler</h3>${[...new Set(h.map(x=>x.topic))].map(t=>{let a=h.filter(x=>x.topic===t);return `<div style="margin:12px 0">${esc(t)} · ${pct(a.filter(x=>x.correct).length,a.length)}% (${a.length} spots)<div class="progress"><div style="width:${pct(a.filter(x=>x.correct).length,a.length)}%"></div></div></div>`}).join('')||'<p class="muted">Tes statistiques apparaîtront après tes premiers exercices.</p>'}</div>`}
+function cardHTML(c){return `<div class="card ${['♥','♦'].includes(c.s)?'red':''}">${c.r}<span>${c.s}</span></div>`}
+function trainPage(){if(!spot)spot=makeSpot();let s=spot;$('#app').innerHTML=`<h2>Simulateur de décisions</h2><div class="panel"><div class="filters"><div><label>Phase</label><select id="phase" onchange="changePhase(this.value)"><option value="all" ${filterPhase==='all'?'selected':''}>Mixte</option><option value="pre" ${filterPhase==='pre'?'selected':''}>Préflop</option><option value="post" ${filterPhase==='post'?'selected':''}>Postflop</option></select></div><div><label>Thème</label><select id="topic" onchange="changeTopic(this.value)"><option value="all">Tous les thèmes</option>${(filterPhase==='all'?[...topics.pre,...topics.post]:topics[filterPhase]).map(t=>`<option ${filterTopic===t?'selected':''}>${esc(t)}</option>`).join('')}</select></div><div style="align-self:end"><button class="btn" onclick="newSpot()">↻ Nouveau spot</button></div></div></div><div class="panel"><div class="stack"><span class="pill">${s.phase==='pre'?'PRÉFLOP':s.street.toUpperCase()} · ${esc(s.topic)}</span><span class="pill">Stack effectif ${s.stack} bb</span><span class="pill">${esc(s.villainType)}</span></div><p><b>Hero ${s.hero}</b> · Adversaire ${s.villain} · MTT 6-max ${s.icm?'· Bulle / TF':s.pko?'· PKO':'· Loin de la bulle'}.</p><div class="stack">${positions.map(p=>`<div class="seat ${p===s.hero?'hero':''}">${p}<br><small>${p===s.hero?'HERO':p===s.villain?'VILLAIN':'—'}</small></div>`).join('')}</div>${s.board.length?`<div style="text-align:center;margin-top:18px"><small>BOARD</small><div class="cards">${s.board.map(cardHTML).join('')}</div></div>`:''}<div style="text-align:center;margin-top:20px"><small>TA MAIN</small><div class="cards">${s.h.map(cardHTML).join('')}</div><b>${labelHand(s.h)} · ${s.stack} bb</b></div><p><b>Historique des actions :</b><br>${s.history.map(x=>esc(x)).join(" → ")}</p><p><b>Pot actuel :</b> ${s.pot} bb · <b>Montant à payer :</b> ${s.toCall} bb · <b>À toi de jouer.</b></p><div class="choices">${s.choices.map((c,i)=>`<button class="choice ${selected===c?'sel':''}" ${answered?'disabled':''} onclick="choose(${i})">${esc(c)}</button>`).join('')}</div><div style="margin-top:17px"><label>Ton raisonnement (facultatif, conservé dans l'historique)</label><textarea id="reason" rows="3" style="width:100%" ${answered?'disabled':''} placeholder="Range adverse, position, SPR, cotes, ICM...">${esc(reason)}</textarea></div><div style="display:flex;gap:10px;margin-top:15px;flex-wrap:wrap"><button class="btn primary" onclick="grade()" ${!selected||answered?'disabled':''}>Valider la décision</button><button class="btn" onclick="newSpot()">Passer au spot suivant →</button></div>${answered?feedbackHTML(s):''}</div>`}
+function detailedAnalysis(s){
+ const h=labelHand(s.h), pair=s.h[0].r===s.h[1].r, suited=s.h[0].s===s.h[1].s;
+ const high=ranks[Math.min(ranks.indexOf(s.h[0].r),ranks.indexOf(s.h[1].r))];
+ const posLate=['CO','BTN','SB'].includes(s.hero);
+ const bullets=[];let calculation='',specific='',risk='';
+ if(s.phase==='pre'){
+   specific=`${h} est ${pair?'une paire servie':suited?'une main assortie':'une main dépareillée'}. ${pair?'La valeur de showdown et les possibilités de brelan sont importantes, mais la profondeur change fortement la stratégie.':suited?'La couleur potentielle et la jouabilité postflop améliorent la réalisation d’équité, sans garantir qu’un call soit profitable.':'Les mains offsuit réalisent souvent moins bien leur équité, surtout hors de position.'} ${posLate?'Ta position permet généralement des ranges plus larges qu’en début de parole.':'La position et les ranges de départ doivent être examinées avec prudence.'}`;
+   if(s.facing===0){
+     bullets.push(['Fold','Préserve ton stack, mais abandonne la possibilité de voler les blindes. Compare la main à une range d’ouverture pour cette position et cette profondeur.']);
+     bullets.push(['Limp','Envisageable surtout dans certaines stratégies SB vs BB ; hors SB, le limp est rarement une ligne d’ouverture standard en MTT 6-max.']);
+     bullets.push(['Raise 2 bb','Engage 2 bb, soit '+(200/s.stack).toFixed(1)+' % du stack. Il faut anticiper les reshoves et la défense des blindes avant d’ouvrir.']);
+     bullets.push(['Shove','Engage '+s.stack+' bb : la fold equity peut compenser l’exposition au risque à faible profondeur, mais à stack profond le rapport risque/récompense se dégrade.']);
+     calculation='Pour un open de 2 bb visant seulement les blindes, le seuil de folds dépend des antes et des blindes réellement en jeu. Les montants exacts ne sont pas renseignés : impossible de calculer un seuil précis.';
+   }else{
+     bullets.push(['Fold','Évite de subir la domination et de réaliser difficilement ton équité ; coûte toutefois la possibilité de défendre une main suffisamment forte.']);
+     bullets.push(['Call','Garde les mains moins fortes dans la range adverse et évite de grossir le pot. La rentabilité dépend des cotes, de la position et de la réalisation d’équité.']);
+     bullets.push(['3-bet / Raise','Cherche de la value ou de la fold equity. Les bloqueurs et la range de continuation adverse importent davantage qu’une simple note de force brute.']);
+     bullets.push(['Shove','Maximise la pression préflop mais risque le stack effectif. Il faut comparer équité quand payé, folds obtenus et coût d’élimination.']);
+     calculation=`Pot actuel ${s.pot} bb, montant restant à payer ${s.toCall} bb. Cotes directes du call : ${s.toCall>0?(100*s.toCall/(s.pot+s.toCall)).toFixed(1)+" %":"sans objet"}. Ces cotes ne tiennent pas compte de la réalisation d’équité ni de l’ICM.`;
+   }
+   risk=`Profil ${s.villainType.toLowerCase()} : adapte les ranges d’open, de call et de reshove à des observations réelles. Ne suppose pas qu’un adversaire inconnu suit une range standard.`;
+ }else{
+   const board=s.board.map(c=>c.r+c.s).join(' '),counts={};s.board.forEach(c=>counts[c.r]=(counts[c.r]||0)+1);
+   const paired=Object.values(counts).some(x=>x>1),suitCounts={};s.board.forEach(c=>suitCounts[c.s]=(suitCounts[c.s]||0)+1);
+   const maxSuit=Math.max(...Object.values(suitCounts)),connected=s.board.filter(c=>'TJQK9876'.includes(c.r)).length>=2;
+   const hit=s.h.some(c=>s.board.some(b=>b.r===c.r));
+   specific=`Board ${board}. ${paired?'Board pairé : les trips et full houses changent les avantages de nuts.':'Board non pairé.'} ${maxSuit>=3?'Trois cartes ou plus de même couleur : les flushes sont possibles.':maxSuit===2?'Deux cartes de même couleur : surveille les tirages et les bloqueurs.':'Board rainbow à ce stade.'} ${connected?'Plusieurs cartes connectables : examine les quintes et les tirages.':''} ${hit?'Ta main partage au moins un rang avec le board, sans que cela suffise à identifier précisément sa force relative.':'Pas de paire directe détectée avec le board ; vérifie les tirages, la hauteur et les possibilités de bluff.'}`;
+   if(s.facing===0){
+     bullets.push(['Check','Contrôle le pot, protège une range de check et conserve les bluffs adverses. Important avec showdown value moyenne ou sans avantage clair.']);
+     bullets.push(['Bet 33%','Petit sizing : peut mettre sous pression une large range adverse et obtenir de la value fine ; requiert un plan face au raise.']);
+     bullets.push(['Bet 75%','Sizing plus polarisé : exige davantage de value ou de bluffs crédibles, avec une range de défense adverse suffisamment faible.']);
+     bullets.push(['Overbet 125%','Demande un avantage de nuts et une construction de range cohérente ; ne se justifie pas seulement parce que la main semble forte.']);
+     calculation=`Si le pot avant mise est bien ${s.pot} bb : mise 33 % ≈ ${(s.pot*.33).toFixed(2)} bb, 75 % ≈ ${(s.pot*.75).toFixed(2)} bb, 125 % ≈ ${(s.pot*1.25).toFixed(2)} bb. Pour un bluff sans équité, les folds requis seraient respectivement 24,8 %, 42,9 % et 55,6 %, hors rake, relances et équité résiduelle.`;
+   }else{
+     bullets.push(['Fold','Abandonne l’équité potentielle mais évite un call perdant face à une range trop forte.']);
+     bullets.push(['Call','Conserve les bluffs et réalise l’équité disponible ; vérifie la fréquence de bluff nécessaire et les cartes futures.']);
+     bullets.push(['Raise 3x','Représente une range forte ou semi-bluff ; nécessite des bloqueurs, de la fold equity et un plan contre les reraises.']);
+     bullets.push(['Shove','Crée une forte pression mais peut isoler contre une range très forte ; attention au SPR et à la couverture des stacks.']);
+     const c=s.facing;calculation=`Le pot affiché (${s.pot} bb) inclut déjà la mise adverse de ${c} bb. Un call de ${s.toCall} bb exige ${(100*s.toCall/(s.pot+s.toCall)).toFixed(1)} % d’équité réalisée dans un modèle simplifié, hors ICM et futures mises.`;
+   }
+   risk=`Sans les actions préflop, les ranges des deux joueurs et le stack restant après les mises, on ne peut pas justifier une fréquence exacte de bet, call ou raise. ${s.street==='River'?'River : pas d’équité future à réaliser ; raisonne en value, bluffs et bloqueurs.':'Anticipe les turns/rivers qui changent l’avantage de nuts.'}`;
+ }
+ if(s.icm)risk+=' ICM : il manque les stacks de la table et les paliers pour calculer un risk premium.';
+ if(s.pko)risk+=' PKO : il manque les primes et la structure des bounties pour quantifier les calls.';
+ const explanation=bullets.map(([name,why])=>`<li style="margin-bottom:9px"><b>${esc(name)}${selected===name?' — ton choix':''} :</b> ${esc(why)}</li>`).join('');
+ return `<h4>1. Lecture du spot</h4><p>${esc(specific)}</p><h4>2. Analyse de chaque option</h4><ul>${explanation}</ul><h4>3. Calculs et sizings</h4><p>${esc(calculation)}</p><h4>4. Ajustement exploitant et limites</h4><p>${esc(risk)}</p><h4>5. Point à retenir</h4><p>${esc(s.phase==='pre'?'Construis d’abord une range par position et profondeur, puis ajuste aux profils et à l’ICM. Une main ne se joue pas sur une note de force isolée.':'Commence par les ranges et l’avantage de nuts, puis choisis une ligne cohérente avec le sizing, les bloqueurs et les cartes futures.')}</p>`;
+}
+function feedbackHTML(s){let sc=s.score[selected]||0,good=sc===s.best,top=s.choices.filter(x=>(s.score[x]||0)===s.best);return `<div class="feedback" style="margin-top:18px"><h3 class="${good?'good':'bad'}">${good?'Choix favorisé par le modèle':'Choix moins favorisé par le modèle'} · ${sc}/3</h3><p><b>Choix favorisés par l’heuristique :</b> ${top.map(esc).join(' ou ')}.</p><p><b>Ta réflexion :</b> ${esc(reason||'Non renseignée')}</p>${detailedAnalysis(s)}<p><b>Fiabilité :</b> le score /3 provient d’une heuristique simplifiée, pas d’une simulation EV ni d’un solveur. Certaines données du spot sont insuffisantes et les actions recommandées peuvent être discutables. Utilise les explications comme méthode d’analyse, pas comme verdict GTO.</p></div>`}
+function choose(i){selected=spot.choices[i];reason=$('#reason')?.value||'';render()};function grade(){if(!selected||answered)return;reason=$('#reason')?.value||'';answered=true;let sc=spot.score[selected]||0;saved.history.unshift({date:new Date().toISOString(),phase:spot.phase,topic:spot.topic,hand:labelHand(spot.h),stack:spot.stack,choice:selected,score:sc,correct:sc===spot.best,reason});saved.history=saved.history.slice(0,1500);save();render()};function newSpot(){spot=makeSpot();selected=null;answered=false;reason='';render()};function changePhase(v){filterPhase=v;filterTopic='all';newSpot()};function changeTopic(v){filterTopic=v;newSpot()};
+function rangeMatrix(preset){const matrix=[];for(let i=0;i<13;i++)for(let j=0;j<13;j++){let name=i===j?ranks[i]+ranks[j]:i<j?ranks[i]+ranks[j]+'s':ranks[j]+ranks[i]+'o';matrix.push(name)}return matrix};function rangeOn(name){if(rangeCustom[name]!==undefined)return rangeCustom[name];let a=ranks.indexOf(name[0]),b=ranks.indexOf(name[1]),s=name.endsWith('s'),pair=name.length===2;let v=pair?72-a*4:72-Math.min(a,b)*5-Math.max(a,b)*1.7+(s?12:0);let threshold=rangePreset.includes('UTG')?52:rangePreset.includes('CO')?39:rangePreset.includes('BTN')?29:rangePreset.includes('SB')?34:rangePreset.includes('BB')?42:48;if(rangePreset.includes('15bb'))threshold+=5;return v>=threshold}
+function rangePage(){let m=rangeMatrix(),active=m.filter(rangeOn).length;$('#app').innerHTML=`<h2>Entraîneur de ranges · 169 mains</h2><div class="panel"><div class="filters"><div><label>Range indicative</label><select onchange="rangePreset=this.value;rangeCustom={};render()">${['UTG 30bb','CO 30bb','BTN 30bb','SB 30bb','BB défense 30bb','BTN 15bb','CO 15bb'].map(x=>`<option ${x===rangePreset?'selected':''}>${x}</option>`).join('')}</select></div><div><label>Actions</label><button class="btn" onclick="rangeCustom={};render()">Réinitialiser</button></div><div><label>Exporter</label><button class="btn" onclick="exportRange()">Copier la range</button></div></div><p><b>${active}/169 catégories sélectionnées</b> · <b>${pct(m.reduce((a,n)=>a+(rangeOn(n)?(n.length===2?6:n.endsWith('s')?4:12):0),0),1326)}% des combinaisons</b></p><div class="matrix">${m.map(n=>`<div class="cell ${rangeOn(n)?'on':''} ${n.length===2?'pair':''}" onclick="toggleRange('${n}')" title="${n}">${n}</div>`).join('')}</div><p class="muted">Clique sur une case pour construire ta propre range. Les présélections sont des approximations didactiques, pas des charts GTO ou Kill Tilt.</p></div><div class="panel"><h3>Exercice de mémorisation</h3><p>Choisis une position, masque mentalement la range, puis sélectionne les mains que tu ouvrirais. Compare les fréquences et travaille les frontières de range.</p><button class="btn" onclick="rangeCustom={};rangePreset='BTN 30bb';render()">Réviser le BTN 30 bb</button></div>`};function toggleRange(n){rangeCustom[n]=!rangeOn(n);render()};function exportRange(){let t=rangeMatrix().filter(rangeOn).join(', ');navigator.clipboard?.writeText(t).then(()=>alert('Range copiée')).catch(()=>prompt('Copie la range',t))}
+function mathPage(){$('#app').innerHTML=`<h2>Calculateurs poker</h2><div class="grid"><div class="panel"><h3>Pot odds</h3><label>Pot avant call (bb)</label><input type="number" id="pot" value="8" min="0" step="0.1"><label>Mise à payer (bb)</label><input type="number" id="call" value="4" min="0" step="0.1"><p id="potResult"></p><button class="btn" onclick="calcMath()">Calculer</button></div><div class="panel"><h3>Fold equity requise</h3><label>Pot gagné si fold (bb)</label><input type="number" id="fePot" value="6" min="0" step="0.1"><label>Mise risquée (bb)</label><input type="number" id="feBet" value="4" min="0" step="0.1"><p id="feResult"></p><button class="btn" onclick="calcMath()">Calculer</button></div><div class="panel"><h3>SPR</h3><label>Stack effectif restant (bb)</label><input type="number" id="sprStack" value="24" min="0" step="0.1"><label>Pot (bb)</label><input type="number" id="sprPot" value="8" min="0" step="0.1"><p id="sprResult"></p><button class="btn" onclick="calcMath()">Calculer</button></div><div class="panel"><h3>MDF théorique</h3><label>Pot avant mise (bb)</label><input type="number" id="mdfPot" value="10" min="0" step="0.1"><label>Mise adverse (bb)</label><input type="number" id="mdfBet" value="7.5" min="0" step="0.1"><p id="mdfResult"></p><button class="btn" onclick="calcMath()">Calculer</button></div></div><p class="muted">Pot odds = call / (pot + call). FE du bluff sans équité = risque / (risque + récompense). MDF = pot / (pot + mise), sans ajustements de range ni réalisation d’équité.</p>`;calcMath()};function calcMath(){const n=id=>Math.max(0,+$('#'+id).value||0),out=(id,val)=>$('#'+id).textContent=val;let p=n('pot'),c=n('call'),f=n('fePot'),b=n('feBet'),sp=n('sprPot'),st=n('sprStack'),mp=n('mdfPot'),mb=n('mdfBet');out('potResult',p+c?`Équité minimale : ${(100*c/(p+c)).toFixed(1)} %`:'Données insuffisantes');out('feResult',f+b?`Folds nécessaires : ${(100*b/(f+b)).toFixed(1)} %`:'Données insuffisantes');out('sprResult',sp?`SPR = ${(st/sp).toFixed(2)}`:'Pot nul');out('mdfResult',mp+mb?`MDF = ${(100*mp/(mp+mb)).toFixed(1)} %`:'Données insuffisantes')}
+const lessons=[['Préflop','Ranges et position','Plus ta position est tardive, plus tu peux ouvrir de mains. Ajuste selon les blindes, l’ICM, les antes et les stacks.'],['Préflop','Push/fold','À faible profondeur, la fold equity, les ranges de call et le risque d’élimination sont essentiels.'],['Préflop','3-bet et défense','Construis une range cohérente entre value et bluffs. Les bloqueurs comptent, mais ne remplacent pas l’équité.'],['Préflop','ICM et PKO','Les paliers créent des risk premiums ; les bounties modifient les incitations de call.'],['Postflop','Avantage de range','Compare les distributions de mains, pas seulement la force de ta main exacte.'],['Postflop','C-bet','Le sizing dépend de la texture, des ranges, du SPR et de la position.'],['Postflop','Turn et river','Prépare tes barrels selon les cartes favorables, les bloqueurs et les fréquences de défense.'],['Postflop','Bluffcatch','Compare les cotes du call à la proportion de bluffs plausibles dans la range adverse.'],['Postflop','Value bet','Choisis un sizing payé suffisamment souvent par des mains moins fortes.'],['Postflop','Multiway','L’équité réalisée et les fréquences de bluff diminuent souvent quand plusieurs joueurs restent dans le pot.']];function lessonsPage(){$('#app').innerHTML=`<h2>Bibliothèque stratégique</h2><div class="panel"><p>Fiches condensées pour guider tes révisions. Elles ne remplacent pas une étude de ranges détaillée.</p>${lessons.map(([a,b,c])=>`<details><summary><span class="pill">${a}</span> ${b}</summary><p>${c}</p></details>`).join('')}</div>`};function historyPage(){$('#app').innerHTML=`<h2>Historique des exercices</h2><div class="panel"><button class="btn" onclick="exportHistory()">Exporter en CSV</button><div style="overflow:auto;margin-top:14px"><table><thead><tr><th>Date</th><th>Module</th><th>Thème</th><th>Main</th><th>Stack</th><th>Action</th><th>Score</th></tr></thead><tbody>${saved.history.map(x=>`<tr><td>${new Date(x.date).toLocaleDateString('fr-FR')}</td><td>${x.phase==='pre'?'Pré':'Post'}</td><td>${esc(x.topic)}</td><td>${esc(x.hand)}</td><td>${x.stack} bb</td><td>${esc(x.choice)}</td><td class="${x.correct?'good':'bad'}">${x.score}/3</td></tr>`).join('')}</tbody></table></div></div>`};function exportHistory(){let rows=[['date','phase','topic','main','stack_bb','decision','score','raisonnement'],...saved.history.map(x=>[x.date,x.phase,x.topic,x.hand,x.stack,x.choice,x.score,x.reason])];download('mtt_lab_historique.csv',rows.map(r=>r.map(x=>'"'+String(x??'').replaceAll('"','""')+'"').join(',')).join('\n'),'text/csv')};function download(name,content,type){let a=document.createElement('a'),url=URL.createObjectURL(new Blob([content],{type}));a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+function settingsPage(){$('#app').innerHTML=`<h2>Paramètres et données</h2><div class="panel"><h3>Sauvegarde locale</h3><p>Les résultats sont stockés uniquement dans ce navigateur. Exporte une sauvegarde avant de vider les données du navigateur.</p><button class="btn" onclick="download('mtt_lab_sauvegarde.json',JSON.stringify(saved,null,2),'application/json')">Exporter une sauvegarde JSON</button><p><label>Importer une sauvegarde</label><input type="file" accept="application/json" onchange="importSave(this)"></p><button class="btn" onclick="if(confirm('Effacer tout ton historique ?')){saved.history=[];save();render()}">Effacer l'historique</button></div><div class="panel"><h3>Limites du moteur</h3><p>Le générateur utilise des règles heuristiques simplifiées. Il ne calcule ni l’équité réelle de la main contre une range, ni les solutions GTO, ni l’ICM/PKO exact. Certains spots peuvent avoir des hypothèses incomplètes ou plusieurs bonnes décisions. Utilise-le pour t’exercer à raisonner, pas comme autorité stratégique absolue.</p></div>`};function importSave(input){let file=input.files[0];if(!file)return;let reader=new FileReader();reader.onload=()=>{try{let obj=JSON.parse(reader.result);if(!Array.isArray(obj.history))throw Error();saved={...saved,...obj};save();alert('Sauvegarde importée');render()}catch{alert('Fichier de sauvegarde invalide')}};reader.readAsText(file)}render();
+if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("./sw.js").catch(()=>{});</script></body></html>
