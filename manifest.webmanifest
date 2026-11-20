@@ -1,0 +1,25 @@
+{
+  "id": "/Mtt-lab-pro1/",
+  "name": "MTT Lab Pro — Poker Trainer",
+  "short_name": "MTT Lab Pro",
+  "description": "Entraînement MTT 6-max préflop et postflop",
+  "start_url": "/Mtt-lab-pro1/",
+  "scope": "/Mtt-lab-pro1/",
+  "display": "standalone",
+  "background_color": "#0d0d10",
+  "theme_color": "#111014",
+  "icons": [
+    {
+      "src": "/Mtt-lab-pro1/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Mtt-lab-pro1/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
